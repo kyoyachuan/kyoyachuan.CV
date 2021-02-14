@@ -18,12 +18,15 @@ jobs:
       run: sudo apt-get install texlive-xetex texlive-fonts-extra 
     
     - name: Build PDFs
-      run: make cv.pdf && cp examples/cv.pdf docs/
+      run: make cv.pdf
     
+    - name: Move PDFs
+      run: mkdir pdfs && cp examples/cv.pdf pdfs/
+
     - name: Deploy Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: docs
+        FOLDER: pdfs
 
